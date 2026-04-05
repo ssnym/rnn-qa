@@ -9,6 +9,7 @@ A simple **RNN-based Question Answering system** built using **Pytorch + FastAPI
 
 ### Project Structure
 
+```text
 rnn-qa/  
 │  
 ├── config/     # model artifacts    
@@ -20,15 +21,15 @@ rnn-qa/
 ├── Dockerfile      # continer setup   
 │  
 ├── inference.py    # prediction logic  
-├── main.py     # FastAPI app / entrypoint  
-├── model.py    # RNN model architecture  
+├── main.py         # FastAPI app / entrypoint  
+├── model.py        # RNN model architecture  
 │  
 ├── requirements.txt   
 │  
 ├── tokenizer.py       # text processing  
 ├── train.py           # training script  
 └── utils.py           # helper functions  
-
+```
 ### Running Locally
 
 
