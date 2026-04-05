@@ -64,5 +64,9 @@ curl --location 'localhost:8000/predict' \
 ```
 
 ## Docker Image
-Prebuilt Docker image available on Docker Hub  
+Prebuilt Docker image available with 600+ pulls  on Docker Hub 
  [https://hub.docker.com/r/ssnym/rnn-qa](https://hub.docker.com/r/ssnym/rnn-qa)
+
+## Acknowledgements
+Tutorial Followed : FastAPI course by CampusX
+
