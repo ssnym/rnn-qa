@@ -1,24 +1,25 @@
-## RNN Question Answering API  
+# RNN Question Answering API  
 
-A simple **RNN-based Question Answering system** built using **Pytorch + FastAPI**, with Docker support
+A simple **RNN-based Question Answering API** built using **Pytorch + FastAPI** and **Docker**.  
+The model is trained using a Recurrent Neural Network (RNN) and exposed through a REST API.
 
-### Workflow
+## Project Workflow
 - Train model using `train.py`
 - Model + vocab stored in `config/`
 - API loads model and serves prediction  
 
-### Project Structure
+## Project Structure
 
 ```text
 rnn-qa/  
 │  
 ├── config/     # model artifacts    
-├── data/       # sample-dataset  
+├── data/       # sample dataset  
 │  
 ├── .gitignore  
 ├── .dockerignore  
 │  
-├── Dockerfile      # continer setup   
+├── Dockerfile      # container setup   
 │  
 ├── inference.py    # prediction logic  
 ├── main.py         # FastAPI app / entrypoint  
@@ -30,43 +31,60 @@ rnn-qa/
 ├── train.py           # training script  
 └── utils.py           # helper functions  
 ```
-### Running Locally
 
+## Running Locally
 
 ```bash
 # Start API  
+git clone https://github.com/ssnym/rnn-qa.git
+
+cd rnn-qa
+
+pip install -r requirements.txt
 
 uvicorn main:app --reload
 ```
 
-```bash
-# Base URL  
+Base URL: `http://127.0.0.1:8000`
 
-http://localhost:8080
+## Running with Docker
+
+A prebuilt Docker image is available on Docker Hub with **650+ pulls**.
+
+Docker Hub: [`https://hub.docker.com/r/ssnym/rnn-qa`](https://hub.docker.com/r/ssnym/rnn-qa)
+
+```bash
+# Pull the image
+docker pull ssnym/rnn-qa
+
+# Run the container:
+docker run -p 8000:8000 ssnym/rnn-qa
 ```
 
-```bash
-# Example Request  
+The API will be available at:
 
-curl --location 'localhost:8000/predict' \
+```
+http://127.0.0.1:8000
+```
+
+## Example Request
+
+```bash
+curl --location 'http://127.0.0.1:8000/predict' \
 --header 'Content-Type: application/json' \
 --data '{
     "question": "What is the capital of France"
 }'
 ```
 
-```bash
-# Example Response   
+## Example Response
 
+```json
 {
     "answer": "Paris",
     "confidence": 0.85
 }
 ```
-
-## Docker Image
-Prebuilt Docker image available with **600+ pulls**  on Docker Hub   
-[https://hub.docker.com/r/ssnym/rnn-qa](https://hub.docker.com/r/ssnym/rnn-qa)
 
 ## Acknowledgements
 Tutorial Followed : FastAPI course by CampusX
