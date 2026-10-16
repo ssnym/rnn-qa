@@ -24,7 +24,7 @@ A small RNN is trained on question and answer pairs and served through a REST AP
 git clone https://github.com/ssnym/rnn-qa.git
 cd rnn-qa
 
-pyton -m venv .venv
+python -m venv .venv
 
 # Linux / macOS
 source .venv/bin/activate
