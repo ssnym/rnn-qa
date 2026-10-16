@@ -31,7 +31,7 @@ MODEL_VERSION = _str("MODEL_VERSION", "1.0.0")
 DEVICE = torch.device(_str("DEVICE", "cuda" if torch.cuda.is_available() else "cpu"))
 
 # Paths
-MODEL_PATH = _path("MODEL_PATH", "config/rnn_checkpoint.pt")
+MODEL_PATH = _path("MODEL_PATH", "artifact/rnn_checkpoint.pt")
 DATA_FILE = _path("DATA_FILE", "data/qa-text-data.csv")
 
 # Model architecture

@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY main.py .
 COPY models/ models/
 COPY src/ src/
-COPY config/ config/
+COPY artifacts/ artifacts/
 
 # expose port
 EXPOSE 8000
