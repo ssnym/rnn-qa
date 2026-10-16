@@ -1,25 +1,28 @@
+from contextlib import asynccontextmanager
+from typing import Annotated
+
+import torch
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
-from typing import Annotated
-from utils import load_model
-from inference import predict
-from model import MODEL_VERSION
-import torch
 
-app = FastAPI()
+from src.config import DEVICE, MODEL_VERSION
+from src.inference import predict
+from src.utils import load_model
 
 model = None
 vocab = None
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
-@app.on_event("startup")
-def load_model_once():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     global model, vocab
     model, vocab = load_model()
-    model.to(device)
+    model.to(DEVICE)
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 class Question(BaseModel):
@@ -52,17 +55,14 @@ def health_check():
 
 @app.post("/predict", response_model=Answer, status_code=200)
 def predict_api(question: Question):
-
     if not question.question.strip():
         raise HTTPException(status_code=400, detail="Empty Question")
 
     try:
-        ans, confidence = predict(model, question.question, vocab, device)
-        ans = ans.capitalize()
+        ans, confidence = predict(model, question.question, vocab, DEVICE)
         return {
-            "answer": ans, 
-            "confidence": round(confidence,2)
+            "answer": ans.capitalize(),
+            "confidence": round(confidence, 2),
         }
-
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

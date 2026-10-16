@@ -10,3 +10,7 @@ data/
 train.py
 .git
 .gitignore
+.git/
+
+.env
+.venv/
