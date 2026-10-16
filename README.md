@@ -4,13 +4,6 @@ A simple **RNN-based Question Answering API** built using **Pytorch** and **Fast
 A small RNN is trained on question and answer pairs and served through a REST API, and the project is packaged as a **Docker** image.
 
 
-## How It Works
-
-- Train the model with `python -m src.train`. This saves the weights and vocabulary to `artifacts/`.
-- The API loads the saved model at startup and returns an answer with a confidence score.
-- When confidence falls below the threshold, the API returns `"I don't know"`.
-
-
 ## Project Workflow
 - Train model with `python -m src.train`. This saves the weights and vocabulary to `artifacts/`.
 - The API loads the saved model at startup and returns an answer with a confidence score.
